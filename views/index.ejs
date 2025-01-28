@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-6">
+        Formulaire issues
+      </h1>
+
+      <form action="/issues/create" method="POST" class="space-y-6">
+
+        <div>
+          <label for="habitant" class="block text-lg font-medium text-gray-700"
+            >Nom : </label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Entrez votre nom"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="issue" class="block text-lg font-medium text-gray-700"
+            >message :</label
+          >
+          <input
+            type="text"
+            id="issue"
+            name="issue"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Entrez votre message"
+            required
+          />
+        </div>
+
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            Envoyer
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
