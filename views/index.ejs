@@ -3,25 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulaire</title>
+    <title>Liste des Issues</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-6">
-        Formulaire issues
-      </h1>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
+      <h1 class="text-3xl font-bold text-center mb-6">Liste des Issues</h1>
+      <ul class="mb-6 space-y-4">
+        <% if (issues.length > 0) { %>
+          <% issues.forEach(function(issue) { %>
+          <li class="p-4 border border-gray-300 rounded-md shadow-sm">
+            <h2 class="text-lg font-bold"><%= issue.title %></h2>
+            <p class="text-sm text-gray-600">Auteur : <%= issue.author %></p>
+            <p class="text-sm text-gray-600">Date : <%= issue.creationDate %></p>
+            <p class="mt-2"><%= issue.description %></p>
+            <span class="inline-block px-2 py-1 mt-3 text-sm font-medium rounded-md <%= issue.status === 'en-cours' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800' %>">
+              <%= issue.status %>
+            </span>
+            
+          </li>
+          <% }); %>
+        <% } else { %>
+          <li class="text-gray-500">Aucune issue à afficher.</li>
+        <% } %>
+      </ul>
 
+      <h2 class="text-2xl font-bold mb-4">Nouveau message</h2>
       <form action="/issues/create" method="POST" class="space-y-6">
-
         <div>
-          <label for="habitant" class="block text-lg font-medium text-gray-700"
-            >Nom : </label
-          >
+          <label for="author" class="block text-lg font-medium text-gray-700">Nom :</label>
           <input
             type="text"
-            id="name"
-            name="name"
+            id="author"
+            name="author"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Entrez votre nom"
             required
@@ -29,23 +43,46 @@
         </div>
 
         <div>
-          <label for="issue" class="block text-lg font-medium text-gray-700"
-            >message :</label
-          >
+          <label for="title" class="block text-lg font-medium text-gray-700">Titre :</label>
           <input
             type="text"
-            id="issue"
-            name="issue"
+            id="title"
+            name="title"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="Entrez votre message"
+            placeholder="Entrez un titre"
             required
           />
+        </div>
+
+        <div>
+          <label for="description" class="block text-lg font-medium text-gray-700">Description :</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Entrez une description détaillée"
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="status" class="block text-lg font-medium text-gray-700">État :</label>
+          <select
+            id="status"
+            name="status"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          >
+            <option value="en-cours">En cours</option>
+            <option value="resolu">Résolu</option>
+          </select>
         </div>
 
         <div class="flex justify-center">
           <button
             type="submit"
-            class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="w-full bg-pink-950 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Envoyer
           </button>
